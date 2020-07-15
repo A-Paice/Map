@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en";style="height:100%,width:100%";>
+
+<title> Streamline </title>
+
+<head>
+
+<link rel="stylesheet" href="scripts/leaflet/leaflet2.css" />
+
+<style>
+
+#mapid{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: #000000;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="mapid"></div>
+
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+<script>
+
+
+///////////////////////////////////////
+///////// Map details ////////////////
+//////////////////////////////////////
+
+var mymap = L.map('mapid').setView([1, 10], 2);
+
+/// Create the map! 
+
+L.tileLayer('maps/bigmapBIG/{z}/{x}/{y}.png',{
+	minZoom: 2,
+	maxZoom: 5,
+	noWrap:true,
+	continuousWorld:false,
+}).addTo(mymap);
+
+///testestest///
+(function(global){
+  var MarkerMixin = {
+    _updateZIndex: function (offset) {
+      this._icon.style.zIndex = this.options.forceZIndex ? (this.options.forceZIndex + (this.options.zIndexOffset || 0)) : (this._zIndex + offset);
+    },
+    setForceZIndex: function(forceZIndex) {
+      this.options.forceZIndex = forceZIndex ? forceZIndex : null;
+    }
+  };
+  if (global) global.include(MarkerMixin);
+})(L.Marker);
+
+///testestest///
+
+////////////////////////////////
+///////// CREATE ICONS /////////
+////////////////////////////////
+
+
+///// QUEST ICONS /////
+/// Noble Quest Icon
+var nobleicon = L.icon({
+    iconUrl: 'quest_shield.png',
+    iconSize:     [80,80], // size of the icon
+    iconAnchor:   [40, 40],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// Elf Quest Icon
+var elficon = L.icon({
+    iconUrl: 'quest_elf.png',
+    iconSize:     [80, 80], // size of the icon
+    iconAnchor:   [40, 40],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// Church Quest Icon
+var churchicon = L.icon({
+    iconUrl: 'quest_church.png',
+    iconSize:     [80, 80], // size of the icon
+    iconAnchor:   [40, 40],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// Monster Quest Icon
+var monstericon = L.icon({
+    iconUrl: 'quest_monster.png',
+    iconSize:     [80, 80], // size of the icon
+    iconAnchor:   [40, 40],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// Dwarf Quest Icon
+var dwarficon = L.icon({
+    iconUrl: 'quest_dwarf.png',
+    iconSize:     [80, 80], // size of the icon
+    iconAnchor:   [40, 40],
+    popupAnchor:  [175, 350],
+    riseOnHover: true,
+    forceZIndex: 2 // point from which the popup should open relative to the iconAnchor
+});
+
+///// PLACE ICONS /////
+/// Black Castle Icon
+var castleicon = L.icon({
+    iconUrl: 'castleicon.png',
+    iconSize:     [60, 60], // size of the icon
+    iconAnchor:   [30, 30],
+    popupAnchor:  [175, 350],
+    forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
+});
+
+/// Large Castle Icon
+var whcastleicon = L.icon({
+    iconUrl: 'whcastleicon.png',
+    iconSize:     [80, 80], // size of the icon
+    iconAnchor:   [40, 40],
+    popupAnchor:  [175, 350],
+    forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
+});
+
+/// Church Icon
+var churchplace = L.icon({
+    iconUrl: 'churchicon.png',
+    iconSize:     [56, 60], // size of the icon
+    iconAnchor:   [28, 30],
+    popupAnchor:  [175, 350],
+    forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
+});
+
+///words///
+
+
+/////////////////////////////////////////////////
+///////// Set icon and co-ord for marks /////////
+/////////////////////////////////////////////////
+
+var cordmarker = L.marker([-58.44773, -94.21875],{
+    icon: churchicon,
+    draggable: true,
+});
+
+cordmarker.on('dragend', function(e){
+    alert(cordmarker.getLatLng().toString());
+}).addTo(mymap);
+
+
+
+/////////////////////////////////////////
+///////// Create CASTLE markers /////////
+////////////////////////////////////////
+
+
+        var castle1 = L.marker([6.18425, 0.4],{icon: castleicon});
+        var castle2 = L.marker([5.35352, 9.93164],{icon: whcastleicon});
+        var castle3 = L.marker([11.30771, 18.14941],{icon: churchplace});
+
+        var castleMarkers = L.featureGroup();
+
+        var j = 1;
+
+        while (j < 4) {
+            var currentCastle = window['castle' + j];
+            currentCastle.addTo(castleMarkers);
+            j++;
+        }
+
+
+
+
+/////////////////////////////////////////////////////
+///////// Shows markers only when zoomed in /////////
+/////////////////////////////////////////////////////
+
+castleMarkers.addLayer(castle1);
+
+mymap.on('zoomend', function() {
+    if (mymap.getZoom() < 3){
+            mymap.removeLayer(castleMarkers);
+
+    }
+    else {
+            mymap.addLayer(castleMarkers);
+        }
+});
+
+mymap.on('zoomend', function() {
+    if (mymap.getZoom() > 3){
+            mymap.addLayer(castleMarkers);
+    }
+    else {
+            mymap.removeLayer(castleMarkers);
+        }
+});
+
+
+////////////////////////////////////////
+///////// Create QUEST markers /////////
+////////////////////////////////////////
+
+        var quest1 = L.marker([5.35352, 9.93164],{icon: nobleicon,riseOnHover: true}); 
+        var quest2 = L.marker([-0.48339, 1.71387],{icon: elficon,riseOnHover: true}); 
+        var quest3 = L.marker([11.1784, 18.14941],{icon: churchicon,riseOnHover: true}); 
+        var quest4 = L.marker([19.31114, 13.0957],{icon: monstericon,riseOnHover: true});
+        var quest5 = L.marker([6.18425, 0.4],{icon: dwarficon,riseOnHover: true}); 
+
+        var questMarkers = L.featureGroup();
+        var i = 1;
+
+        while (i < 6) {
+            var currentQuest = window['quest' + i];
+            currentQuest.addTo(questMarkers);
+            i++;
+        }
+
+
+var cordmarkerMarker = L.featureGroup();
+
+
+var dataLayers = {
+    "Quests": questMarkers,
+};
+
+
+
+L.control.layers(null,dataLayers,{collapsed: false}).addTo(mymap);
+
+
+
+
+</script>
+
+</body>
+
+</html>

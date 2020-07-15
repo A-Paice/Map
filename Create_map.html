@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en";style="height:100%,width:100%";>
+
+<title> Alren Map: Test Map</title>
+
+<head>
+
+<link rel="stylesheet" href="scripts/leaflet/leaflet2.css" />
+
+<style>
+
+#mapid{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: #000000;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="mapid"></div>
+
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.css">
+<script src="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.js"></script>
+
+<script>
+
+///////// Generic map details /////////
+
+var mymap = L.map('mapid').setView([1, 10], 2);
+
+///////// Create the map! /////////
+
+L.tileLayer('maps/bigmapBIG/{z}/{x}/{y}.png',{
+	minZoom: 2,
+	maxZoom: 5,
+	noWrap:true,
+	continuousWorld:false,
+}).addTo(mymap);
+
+
+///// Ruler
+
+
+///////// Create custom icons for quests /////////
+
+/// Generic Quest Icon
+var qicon = L.icon({
+    iconUrl: 'questmarker.png',
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor:   [20, 20],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// Noble Quest Icon
+var nobleicon = L.icon({
+    iconUrl: 'nobleicon.png',
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor:   [20, 20],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// Elf Quest Icon
+var elficon = L.icon({
+    iconUrl: 'elficon.png',
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor:   [20, 20],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// Castle Icon
+var castleicon = L.icon({
+    iconUrl: 'castleicon.png',
+    iconSize:     [46, 34], // size of the icon
+    iconAnchor:   [23, 17],
+    popupAnchor:  [0, 300] // point from which the popup should open relative to the iconAnchor
+});
+
+/// WhiteCastle Icon
+var wcastleicon = L.icon({
+    iconUrl: 'whitecastleicon.png',
+    iconSize:     [50, 46], // size of the icon
+    iconAnchor:   [25, 23],
+    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+});
+
+/// SilverEyrie Icon
+var silvereyrie = L.icon({
+    iconUrl: '_0000_Silver-eyrie.png',
+    iconSize:     [120, 14], // size of the icon
+    iconAnchor:   [60, 7],
+    popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
+});
+
+
+
+///////// Create markers /////////
+
+/// Set icon and co-ord for marks 
+
+var qmark = L.marker([5.13471, 9.93164],{
+    icon:nobleicon});
+var qmark2 = L.marker([0.52734, 1.80176],{
+    icon:elficon});
+var castle1 = L.marker([6.3153, 0.79102],{
+    icon:castleicon});
+var silvereyrie1 = L.marker([7.53676, 0.79102],{
+    icon:silvereyrie});
+
+
+/// Bind popups to specific markers
+
+qmark.bindPopup("<img src='" + "partyq.png" + "' width=400/>");
+qmark2.bindPopup("<img src='" + "elfq.png" + "' width=400/>");
+castle1.bindPopup("<img src='" + "strongholdpopup.png" + "' width=200/>");
+
+  silvereyrie1.bindPopup("<img src='" + "strongholdinfo.png" + "' width=200/>");
+        silvereyrie1.on('mouseover', function (e) {
+            this.openPopup();
+        });
+        silvereyrie1.on('mouseout', function (e) {
+            this.closePopup();
+        });
+
+          
+
+/// Make markers appear on only the final few zoom levels
+var allMarkers = new L.FeatureGroup([qmark,qmark2,castle1]);
+
+allMarkers.addLayer(qmark);
+mymap.on('zoomend', function() {
+    if (mymap.getZoom() < 3){
+            mymap.removeLayer(allMarkers);
+    }
+    else {
+            mymap.addLayer(allMarkers);
+        }
+});
+
+mymap.on('zoomend', function() {
+    if (mymap.getZoom() >3){
+            mymap.addLayer(allMarkers);
+    }
+    else {
+            mymap.removeLayer(allMarkers);
+        }
+});
+
+///tes all marker 2
+var allMarkers2 = new L.FeatureGroup();
+
+allMarkers2.addLayer(silvereyrie1);
+mymap.on('zoomend', function() {
+    if (mymap.getZoom() < 4){
+            mymap.removeLayer(allMarkers2);
+    }
+    else {
+            mymap.addLayer(allMarkers2);
+        }
+});
+
+mymap.on('zoomend', function() {
+    if (mymap.getZoom() >4){
+            mymap.addLayer(allMarkers2);
+    }
+    else {
+            mymap.removeLayer(allMarkers2);
+        }
+});
+
+/// Test Circle, i.e the domain on the stronghold
+var circle = L.circle([10.3153, 10.79102], {
+          color: "red",
+          fillColor: "red",
+          fillOpacity: 0.5,
+          radius: 200.0
+      }).addTo(mymap);       
+
+/// Helpful marker to get co-ords
+
+var cordmarker = L.marker([0, 0],{
+    icon: qicon,
+    draggable: true,
+}).addTo(mymap);
+
+cordmarker.on('dragend', function(e){
+    alert(cordmarker.getLatLng().toString());
+});
+
+/// test stuff
+
+
+
+
+
+</script>
+
+</body>
+
+</html>
