@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en";style="height:100%,width:100%";>
 
-<title> Streamline </title>
+<title> .:Alren Map:. (version 0.1) </title>
 
 <head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">.
 <link rel="stylesheet" href="scripts/leaflet/leaflet2.css" />
 
 <style>
@@ -25,8 +26,7 @@
 
 <div id="mapid"></div>
 
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-
+<script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
 <script>
 
 
@@ -69,41 +69,41 @@ L.tileLayer('newmap/maptiles/{z}/{x}/{y}.png',{
 /// Noble Quest Icon
 var nobleicon = L.icon({
     iconUrl: 'quest_shield.png',
-    iconSize:     [80,80], // size of the icon
-    iconAnchor:   [40, 40],
-    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+    iconSize:     [100,100], // size of the icon
+    iconAnchor:   [50, 50],
+    popupAnchor:  [140, 350] // point from which the popup should open relative to the iconAnchor
 });
 
 /// Elf Quest Icon
 var elficon = L.icon({
     iconUrl: 'quest_elf.png',
-    iconSize:     [80, 80], // size of the icon
-    iconAnchor:   [40, 40],
-    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+    iconSize:     [100, 100], // size of the icon
+    iconAnchor:   [50, 50],
+    popupAnchor:  [140, 350] // point from which the popup should open relative to the iconAnchor
 });
 
 /// Church Quest Icon
 var churchicon = L.icon({
     iconUrl: 'quest_church.png',
-    iconSize:     [80, 80], // size of the icon
-    iconAnchor:   [40, 40],
-    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+    iconSize:     [100, 100], // size of the icon
+    iconAnchor:   [50, 50],
+    popupAnchor:  [140, 350] // point from which the popup should open relative to the iconAnchor
 });
 
 /// Monster Quest Icon
 var monstericon = L.icon({
     iconUrl: 'quest_monster.png',
-    iconSize:     [80, 80], // size of the icon
-    iconAnchor:   [40, 40],
-    popupAnchor:  [175, 350] // point from which the popup should open relative to the iconAnchor
+    iconSize:     [100, 100], // size of the icon
+    iconAnchor:   [50, 50],
+    popupAnchor:  [140, 350] // point from which the popup should open relative to the iconAnchor
 });
 
 /// Dwarf Quest Icon
 var dwarficon = L.icon({
     iconUrl: 'quest_dwarf.png',
-    iconSize:     [80, 80], // size of the icon
-    iconAnchor:   [40, 40],
-    popupAnchor:  [175, 350],
+    iconSize:     [100, 100], // size of the icon
+    iconAnchor:   [50, 50],
+    popupAnchor:  [140, 350],
     riseOnHover: true,
     forceZIndex: 2 // point from which the popup should open relative to the iconAnchor
 });
@@ -114,7 +114,7 @@ var castleicon = L.icon({
     iconUrl: 'castleicon.png',
     iconSize:     [60, 60], // size of the icon
     iconAnchor:   [30, 30],
-    popupAnchor:  [175, 350],
+    popupAnchor:  [140, 350],
     forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
 });
 
@@ -123,7 +123,7 @@ var whcastleicon = L.icon({
     iconUrl: 'whcastleicon.png',
     iconSize:     [80, 80], // size of the icon
     iconAnchor:   [40, 40],
-    popupAnchor:  [175, 350],
+    popupAnchor:  [140, 350],
     forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
 });
 
@@ -132,7 +132,7 @@ var churchplace = L.icon({
     iconUrl: 'churchicon.png',
     iconSize:     [56, 60], // size of the icon
     iconAnchor:   [28, 30],
-    popupAnchor:  [175, 350],
+    popupAnchor:  [140, 350],
     forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
 });
 

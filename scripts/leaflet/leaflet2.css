@@ -387,18 +387,23 @@
 .leaflet-popup {
 	position: absolute;
 	text-align: center;
+	width: auto;
+	pointer-events: none;
 	}
 .leaflet-popup-content-wrapper {
 	padding: 0px;
+	width: auto;
 	text-align: left;
 	border-radius: 0px;
 	}
 .leaflet-popup-content {
-	margin: 0 auto;
+	margin: auto;
+	width: auto;
 	line-height: 1.4;
 	}
 .leaflet-popup-content p {
 	margin: 0 auto;
+	width: auto;
 	}
 .leaflet-popup-tip-container {
 	margin: 0 auto;
