@@ -112,13 +112,45 @@ var dwarficon = L.icon({
     forceZIndex: 2 // point from which the popup should open relative to the iconAnchor
 });
 
+/// Shadow Quest Icon
+var shadowicon = L.icon({
+    iconUrl: 'quest_shadow.png',
+    iconSize:     [100, 100], // size of the icon
+    iconAnchor:   [50, 50],
+    popupAnchor:  [140, 350],
+    riseOnHover: true,
+    forceZIndex: 2 // point from which the popup should open relative to the iconAnchor
+});
+
+/// Small Shadow Quest Icon
+var smshadowicon = L.icon({
+    iconUrl: 'quest_shadow.png',
+    iconSize:     [60, 60], // size of the icon
+    iconAnchor:   [30, 30],
+    popupAnchor:  [140, 350],
+    riseOnHover: true,
+    forceZIndex: 2 // point from which the popup should open relative to the iconAnchor
+});
+
+/// Generic Quest Icon
+var genicon = L.icon({
+    iconUrl: 'genicon.png',
+    iconSize:     [60, 60], // size of the icon
+    iconAnchor:   [30, 30],
+    popupAnchor:  [140, 350],
+    riseOnHover: true,
+    forceZIndex: 2 // point from which the popup should open relative to the iconAnchor
+});
+
+
+
 ///// PLACE ICONS /////
 /// Black Castle Icon
 var castleicon = L.icon({
     iconUrl: 'castleicon.png',
     iconSize:     [60, 60], // size of the icon
     iconAnchor:   [30, 30],
-    popupAnchor:  [140, 350],
+    popupAnchor:  [0, -30],
     forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
 });
 
@@ -127,7 +159,7 @@ var whcastleicon = L.icon({
     iconUrl: 'whcastleicon.png',
     iconSize:     [80, 80], // size of the icon
     iconAnchor:   [40, 40],
-    popupAnchor:  [140, 350],
+    popupAnchor:  [0, -40],
     forceZIndex: 1 // point from which the popup should open relative to the iconAnchor
 });
 
@@ -162,6 +194,11 @@ cordmarker.on('dragend', function(e){
 ///////// Create CASTLE markers /////////
 ////////////////////////////////////////
 
+        //var castle = L.marker([],{icon: whcastleicon});
+        //var castle = L.marker([],{icon: castleicon});
+        //var castle = L.marker([],{icon: castleicon});
+
+
 
         var castle1 = L.marker([-52.9354, -0.08789],{icon: castleicon});
         var castle2 = L.marker([-53.51418, 10.2832],{icon: whcastleicon});
@@ -170,17 +207,40 @@ cordmarker.on('dragend', function(e){
         var castle5 = L.marker([-55.72711, 25.00488],{icon: castleicon});
         var castle6 = L.marker([-64.32087, 18.58887],{icon: whcastleicon});
         var castle7 = L.marker([-61.58549, 28.38867],{icon: castleicon});
+        var castle8 = L.marker([-34.12545, 19.77539],{icon: whcastleicon});
+        var castle9 = L.marker([-40.34654, 11.77734],{icon: castleicon});
+        var castle10 = L.marker([-22.99885, 4.6582],{icon: castleicon});
+        var castle11 = L.marker([-63.29294, -76.72852],{icon: castleicon}); ///chansard
+        var castle12 = L.marker([-69.03714, -61.08398],{icon: castleicon}); ///eaglestead
+        var castle13 = L.marker([-61.93895, -57.43652],{icon: castleicon}); ///yieldon
+        var castle14 = L.marker([-62.87519, -37.35352],{icon: whcastleicon}); ///ruftmoorcastle
+        var castle15 = L.marker([-61.50173, -12.30469],{icon: castleicon}); ///wittden
+        var castle16 = L.marker([-51.64529, -43.19824],{icon: castleicon}); ///st.humbledon'spass
+        var castle17 = L.marker([-57.30279, -76.50879],{icon: castleicon}); ///Little-Brooke
+        var castle18 = L.marker([-43.48481, -23.90625],{icon: castleicon}); ///st.oshwren
+        var castle19 = L.marker([-39.53794, -4.2627],{icon: whcastleicon}); ///oakhaven
+        var castle20 = L.marker([-69.44213, -79.40918],{icon: castleicon}); ///hornrvaen
 
         var castleMarkers = L.featureGroup();
 
         var j = 1;
 
-        while (j < 8) {
+        while (j < 21) {
             var currentCastle = window['castle' + j];
             currentCastle.addTo(castleMarkers);
             j++;
-        }
+        } // set j to (castle total - 1)
 
+castle11.bindPopup("<img src='" + "chansard.png" + "' width=300/>");
+castle12.bindPopup("<img src='" + "eaglestead.png" + "' width=300/>");
+castle13.bindPopup("<img src='" + "yieldon.png" + "' width=300/>");
+castle14.bindPopup("<img src='" + "ruftmoor.png" + "' width=300/>");
+castle15.bindPopup("<img src='" + "wittden.png" + "' width=300/>");
+castle16.bindPopup("<img src='" + "humbledonspass.png" + "' width=300/>");
+castle17.bindPopup("<img src='" + "littlebrooke.png" + "' width=300/>");
+castle18.bindPopup("<img src='" + "stoshwren.png" + "' width=300/>");
+castle19.bindPopup("<img src='" + "oakhaven.png" + "' width=300/>");
+castle20.bindPopup("<img src='" + "feathren.png" + "' width=300/>");
 
 
 
@@ -218,12 +278,26 @@ mymap.on('zoomend', function() {
         var quest2 = L.marker([-56.18002, 2.25121],{icon: elficon,riseOnHover: true}); 
         var quest3 = L.marker([-49.52521, 18.80859],{icon: churchicon,riseOnHover: true}); 
         var quest4 = L.marker([-43.71759, 11.34789],{icon: monstericon,riseOnHover: true});
-        var quest5 = L.marker([-53.40953, -0.08789],{icon: dwarficon,riseOnHover: true}); 
+        var quest5 = L.marker([-53.40953, -0.08789],{icon: dwarficon,riseOnHover: true});
+        var quest6 = L.marker([-69.54213, -79.40918],{icon: smshadowicon,riseOnHover: true});//hornraven  
+        var quest7 = L.marker([-48.19539, -36.21094],{icon: shadowicon,riseOnHover: true});//alrenarmy  
+        var quest8 = L.marker([-75.9042, -88.97715],{icon: smshadowicon,riseOnHover: true});//chainwall 
+        var quest9 = L.marker([-62.97519, -37.35352],{icon: shadowicon,riseOnHover: true});//ruftmoor 
+        var quest10 = L.marker([-58.60364, -31.9045],{icon: smshadowicon,riseOnHover: true});//mountainpass 
+        var quest11 = L.marker([-52.5097, -44.2068],{icon: shadowicon,riseOnHover: true});//hollowking 
+        var quest12 = L.marker([-69.13714, -61.08398],{icon: shadowicon,riseOnHover: true});//eaglstead 
+        var quest13 = L.marker([-62.03895, -57.43652],{icon: shadowicon,riseOnHover: true});//yieldon 
+        var quest14 = L.marker([-70.42008, -76.94024],{icon: genicon,riseOnHover: true});//crystalfarm
+        var quest15 = L.marker([-65.94007, -76.46084],{icon: genicon,riseOnHover: true});//boat
+
+
+
+
 
         var questMarkers = L.featureGroup();
         var i = 1;
 
-        while (i < 6) {
+        while (i < 16) {
             var currentQuest = window['quest' + i];
             currentQuest.addTo(questMarkers);
             i++;
@@ -236,6 +310,15 @@ quest2.bindPopup("<img src='" + "elfq.png" + "' width=400/>");
 quest3.bindPopup("<img src='" + "churchq.png" + "' width=400/>");
 quest4.bindPopup("<img src='" + "monsterq.png" + "' width=400/>");
 quest5.bindPopup("<img src='" + "dwarfq.png" + "' width=400/>");
+quest6.bindPopup("<img src='" + "shadowq8.png" + "' width=400/>");
+quest7.bindPopup("<img src='" + "shadowq7.png" + "' width=400/>");
+quest8.bindPopup("<img src='" + "shadowq6.png" + "' width=400/>");
+quest9.bindPopup("<img src='" + "shadowq5.png" + "' width=400/>");
+quest10.bindPopup("<img src='" + "shadowq4.png" + "' width=400/>");
+quest11.bindPopup("<img src='" + "shadowq3.png" + "' width=400/>");
+quest12.bindPopup("<img src='" + "shadowq2.png" + "' width=400/>");
+quest13.bindPopup("<img src='" + "shadowq1.png" + "' width=400/>");
+
 
 
 
